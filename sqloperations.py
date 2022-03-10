@@ -226,7 +226,7 @@ def getFileListFromUser(user):
 			op=op+"</tr>\n"
 		op=op+"\n"
 		if len(retValue) ==0:
-			op='<tr><th> No report available. </th></tr>'
+			op='<tr><th> No transaction history available. </th></tr>'
 		return op
 	except:
 		return "Error"
