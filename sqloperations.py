@@ -279,6 +279,21 @@ def createRequestsTable():
 	except:
 		pass
 	
+def addReq(req_sen,req_rec,amt,tok):
+	try:
+		command = 'INSERT INTO [Req] VALUES (?,?,?,?)'	
+		cursor.execute(command,req_sen,req_rec,amt,tok)
+		cursor.commit()
+	except:
+		createRequestsTable()
+		try:
+			command = 'INSERT INTO [Req] VALUES (?,?,?,?)'	
+			cursor.execute(command,req_sen,req_rec,amt,tok)
+			cursor.commit()
+		except:
+			pass
+	
+	
 def deleteReq(token):
 	try:
 		command='DELETE FFROM [Req] WHERE token=?'
