@@ -319,7 +319,7 @@ def getRequests(req_rec):
 			op=op+'<tr>\n'
 			op=op+'<td>'+i[0]+'</td>\n'
 			op=op+'<td>'+u'\u20B9'+i[1]+'</td>\n'
-			op=op+'<td><a href="'+i[2]+'">Redeem</a></td>\n'
+			op=op+'<td><a href="/readtag?tagid='+i[2]+'">Redeem</a></td>\n'
 			op=op+"</tr>\n"
 		op=op+"\n"
 		if len(retValue) ==0:
