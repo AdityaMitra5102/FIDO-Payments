@@ -260,6 +260,7 @@ def dashboard():
 				return render_template('error.html', reason="Receiver and sender cannot be same")
 			amt=int(getExpiryFromTag(tok))
 			deleteTag(tok)
+			deleteReq('tag_'+tok)
 			dtm=datetime.now(pytz.timezone('Asia/Calcutta')).strftime("%Y/%m/%d, %H:%M:%S")
 			amt2=str(amt)
 			print(sender,"",dtm,receiver,amt2)
