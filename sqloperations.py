@@ -271,7 +271,48 @@ def deleteToken(token):
 		cursor.commit()
 	except:
 		pass
-
+	
+def createRequestsTable():
+	try:
+		cursor.execute("CREATE TABLE [Req](req_sender VARCHAR(50), req_receiver VARCHAR(50), amt VARCHAR(50), token VARCHAR(50) UNIQUE)")
+		cursor.commit()
+	except:
+		pass
+	
+def deleteReq(token):
+	try:
+		command='DELETE FFROM [Req] WHERE token=?'
+		cursor.execute(command,token)
+		cursor.commit()
+	except:
+		pass
+	
+def getRequests(req_rec):
+	try:
+		op='\n'
+		op=op+'<tr>\n'
+		op=op+'<th>From</th>\n'
+		op=op+'<th>Amount</th>\n'
+		op=op+'<th>Redeem</th>\n'
+		op=op+'</tr>\n'
+		command= 'SELECT req_sender, amt, token FROM [File] where req_receiver=?'
+		cursor.execute(command,req_rec)
+		retValue=cursor.fetchall()
+		cursor.commit()
+		print(retValue)
+		for i in retValue:
+			op=op+'<tr>\n'
+			op=op+'<td>'+i[0]+'</td>\n'
+			op=op+'<td>'+u'\u20B9'+i[1]+'</td>\n'
+			op=op+'<td><a href="'+i[2]+'">Redeem</a></td>\n'
+			op=op+"</tr>\n"
+		op=op+"\n"
+		if len(retValue) ==0:
+			op='<tr><th> No requests available. </th></tr>'
+		return op
+	except:
+		return "Error"
+	
 def resetDb():
 	try:
 		command='DROP table [User];'
@@ -297,6 +338,12 @@ def resetDb():
 		cursor.commit()
 	except:
 		pass
+	try:
+		command='DROP table [Req];'
+		cursor.execute(command)
+		cursor.commit()
+	except:
+		pass
 	
 
 def createAllTables():
@@ -304,4 +351,5 @@ def createAllTables():
 	createTagsTable()
 	createFileTable()
 	createAuthTable()
+	createRequestsTable()
 	
