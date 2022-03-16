@@ -198,6 +198,17 @@ def inittag():
 def inittransfer():
 	tagid=request.args.get('token')
 	return render_template("transferto.html",token=tagid)
+
+@app.route("/finishtransfer",methods=["GET","POST"])
+def finishtransfer():
+	getUserCount()
+	recuname=request.form['uname'].strip()
+	tok=request.form['tok'].strip
+	token=tok[4:].strip()
+	senderuname=getUsernameFromTag(token)
+	amt=getExpiryFromTag(tok)
+	addReq(senderuname,recuname,amt,tok)
+	return redirect("/")
 	
 @app.route("/fidoreg", methods=["GET","POST"])
 def fidoreg():
