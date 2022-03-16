@@ -194,7 +194,7 @@ def inittag():
 		return render_template("webnfc.html", scanbuttonparam="hidden", writebuttonparam="", url=url,token=tagid)
 	return redirect("/")
 
-@app.route("/inittransfer", methods=["GET","POST"]):
+@app.route("/inittransfer", methods=["GET","POST"])
 def inittransfer():
 	tagid=request.args.get('token')
 	return render_template("transferto.html",token=tagid)
