@@ -309,7 +309,7 @@ def getRequests(req_rec):
 		op=op+'<tr>\n'
 		op=op+'<th>From</th>\n'
 		op=op+'<th>Amount</th>\n'
-		op=op+'<th>Redeem</th>\n'
+		op=op+'<th>Link</th>\n'
 		op=op+'</tr>\n'
 		command= 'SELECT req_sender, amt, token FROM [Req] where req_receiver=?'
 		cursor.execute(command,req_rec)
@@ -320,7 +320,7 @@ def getRequests(req_rec):
 			op=op+'<tr>\n'
 			op=op+'<td>'+i[0]+'</td>\n'
 			op=op+'<td>'+u'\u20B9'+i[1]+'</td>\n'
-			op=op+'<td><a href="/readtag?tagid='+i[2]+'">Redeem</a></td>\n'
+			op=op+'<td><a href="/readtag?tagid='+i[2]+'">Accept</a></td>\n'
 			op=op+"</tr>\n"
 		op=op+"\n"
 		if len(retValue) ==0:
