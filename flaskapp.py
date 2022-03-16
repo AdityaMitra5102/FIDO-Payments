@@ -207,7 +207,7 @@ def finishtransfer():
 	token=tok[4:].strip()
 	print('Token transfer'+token)
 	senderuname=getUsernameFromTag(token)
-	amt=getExpiryFromTag(tok)
+	amt=getExpiryFromTag(token)
 	print(senderuname,recuname,amt,tok)
 	addReq(senderuname,recuname,amt,tok)
 	return redirect("/")
