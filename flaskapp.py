@@ -196,7 +196,7 @@ def inittag():
 
 @app.route("/inittransfer", methods=["GET","POST"])
 def inittransfer():
-	tagid=request.args.get('token')
+	tagid=request.args.get('tagid')
 	return render_template("transferto.html",token=tagid)
 
 @app.route("/finishtransfer",methods=["GET","POST"])
