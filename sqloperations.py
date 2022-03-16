@@ -310,7 +310,7 @@ def getRequests(req_rec):
 		op=op+'<th>Amount</th>\n'
 		op=op+'<th>Redeem</th>\n'
 		op=op+'</tr>\n'
-		command= 'SELECT req_sender, amt, token FROM [File] where req_receiver=?'
+		command= 'SELECT req_sender, amt, token FROM [Req] where req_receiver=?'
 		cursor.execute(command,req_rec)
 		retValue=cursor.fetchall()
 		cursor.commit()
