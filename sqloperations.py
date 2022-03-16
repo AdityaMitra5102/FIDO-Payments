@@ -296,6 +296,7 @@ def addReq(req_sen,req_rec,amt,tok):
 	
 def deleteReq(token):
 	try:
+		print('Deleting ',token)
 		command='DELETE FFROM [Req] WHERE token=?'
 		cursor.execute(command,token)
 		cursor.commit()
