@@ -193,6 +193,10 @@ def inittag():
 		#sendEmailTokenAdd(eml,iname,exp)
 		return render_template("webnfc.html", scanbuttonparam="hidden", writebuttonparam="", url=url,token=tagid)
 	return redirect("/")
+
+@app.route("/inittransfer", methods=["GET","POST"]):
+	tagid=request.args.get('token')
+	return render_template("transferto.html",token=tagid)
 	
 @app.route("/fidoreg", methods=["GET","POST"])
 def fidoreg():
