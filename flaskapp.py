@@ -205,6 +205,7 @@ def finishtransfer():
 	recuname=request.form['uname'].strip()
 	tok=request.form['tok'].strip()
 	token=tok[4:].strip()
+	print(token)
 	senderuname=getUsernameFromTag(token)
 	amt=getExpiryFromTag(tok)
 	addReq(senderuname,recuname,amt,tok)
