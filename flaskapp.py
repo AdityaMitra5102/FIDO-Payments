@@ -263,6 +263,7 @@ def dashboard():
 			amt=int(getExpiryFromTag(tok))
 			deleteTag(tok)
 			deleteReq('tag_'+tok)
+			print(tok)
 			dtm=datetime.now(pytz.timezone('Asia/Calcutta')).strftime("%Y/%m/%d, %H:%M:%S")
 			amt2=str(amt)
 			print(sender,"",dtm,receiver,amt2)
