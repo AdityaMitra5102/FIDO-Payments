@@ -203,7 +203,7 @@ def inittransfer():
 def finishtransfer():
 	getUserCount()
 	recuname=request.form['uname'].strip()
-	tok=request.form['tok'].strip
+	tok=request.form['tok'].strip()
 	token=tok[4:].strip()
 	senderuname=getUsernameFromTag(token)
 	amt=getExpiryFromTag(tok)
