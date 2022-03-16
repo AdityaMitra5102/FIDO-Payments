@@ -208,6 +208,7 @@ def finishtransfer():
 	print(token)
 	senderuname=getUsernameFromTag(token)
 	amt=getExpiryFromTag(tok)
+	print(senderuname,recuname,amt,tok)
 	addReq(senderuname,recuname,amt,tok)
 	return redirect("/")
 	
