@@ -195,6 +195,7 @@ def inittag():
 	return redirect("/")
 
 @app.route("/inittransfer", methods=["GET","POST"]):
+def inittransfer():
 	tagid=request.args.get('token')
 	return render_template("transferto.html",token=tagid)
 	
