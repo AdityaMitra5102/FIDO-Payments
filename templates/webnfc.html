@@ -84,7 +84,8 @@
             <button class="btn btn-lg" id="scanButton" {{scanbuttonparam}}>Scan NFC</button>
             <button class="btn btn-lg" id="writeButton" {{writebuttonparam}}>Write to NFC</button>
             <button class="btn btn-lg" id="shareButton" {{writebuttonparam}}>Share</button>
-
+            <button class="btn btn-lg" id="transferButton" {{writebuttonparam}}>Send to account</button>
+            
           </article>
         </div>
       </section>
@@ -199,7 +200,10 @@
           window.location.href = "/";
         }
       });
-
+      
+      transferButton.addEventListener("click", async () => {
+      window.location.href="/inittransfer?tagid=tag_{{token}}"
+      });
     </script>
 
     <script>
