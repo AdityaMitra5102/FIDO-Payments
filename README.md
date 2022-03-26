@@ -41,9 +41,5 @@ FAQ:
    family members of the user can use the security key.
 3. What are the system requirements for the user? – Any android phone with Google Chrome
    89+ and NFC reader.
-4. What are the system requirements for the hospital? – Android device with Google Chrome
-   89+ and NFC reader. However, it is inconvenient for the hospital to use phone so any
-   computer with NFC reader is supposed to work. Some laptops have NFC readers inbuilt, as
-   well as USB NFC readers are available.
-5. How will the records be stored? – The records will be stored and recorded in the database of the concerned bank.
+5. How will the records be stored? – The records will be stored and recorded in the database.
      User may click on the appropriate option in order to view previous transactions history
