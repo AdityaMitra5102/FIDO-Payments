@@ -13,7 +13,10 @@ from sqloperations import *
 from emailoperations import *
 from storageoperations import *
 from user_agents import parse
-
+from PIL import Image
+from io import BytesIO
+from deepface import DeepFace
+import numpy as np
 import base64
 import requests
 import hashlib
@@ -176,10 +179,6 @@ def authenticate():
 
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
-	from PIL import Image
-	from io import BytesIO
-	import numpy as np
-	from deepface import DeepFace
 	try:
 		getUserCount()
 		uname=request.form["param"]
