@@ -91,7 +91,7 @@ def signupresp():
 	sec=name+"$"+uname+"$"+eml+"$"+date_time+"$"+request.remote_addr+"$"+tok
 	encotp=encr(sec)
 	lnk='https://'+url+'/otpinp?token='+encotp
-	sendEmailLink(eml,lnk,request.user_agent,get_location(request.remote_addr))
+	sendEmailLink(eml,lnk,request.user_agent)
 	return render_template("emailsent.html", reason='You can exit this tab and open the link sent to your email from this device only. Link valid for 10 mins.')
 	
 @app.route("/otpinp", methods=["GET"])
@@ -374,7 +374,7 @@ def loginotp():
 	sec=uname+"$"+date_time+"$"+request.remote_addr+"$"+tok
 	encotp=encr(sec)
 	lnk='https://'+url+'/loginotpinp?token='+encotp
-	sendEmailLink(eml,lnk,request.user_agent,get_location(request.remote_addr))
+	sendEmailLink(eml,lnk,request.user_agent)
 	return render_template("emailsent.html", reason='You can exit this tab and open the link sent to your email from this device only. Link valid for 10 mins.')
 	
 @app.route("/loginotpinp", methods=["GET","POST"])
