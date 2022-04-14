@@ -38,7 +38,7 @@ def resetContainers():
     cryptocontainer.delete_container()
   except Exception as e:
     pass
- try:
+  try:
     imagecontainer.delete_container()
   except Exception as e:
     pass
