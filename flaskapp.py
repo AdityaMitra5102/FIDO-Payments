@@ -31,6 +31,10 @@ url="payments.centralindia.cloudapp.azure.com"
 filepth='/home/vm_user/medrecords/'
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
+metrics = ["cosine", "euclidean", "euclidean_l2"]
+detectors = ["opencv", "ssd", "mtcnn", "retinaface"]
+models = ["VGG-Face","Facenet","OpenFace","DeepID","ArcFace"]
+
 createAllTables()
 createContainers()
 
