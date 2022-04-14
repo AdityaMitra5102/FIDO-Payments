@@ -17,6 +17,7 @@ from PIL import Image
 from io import BytesIO
 from deepface import DeepFace
 import numpy as np
+import traceback
 import base64
 import requests
 import hashlib
@@ -190,6 +191,7 @@ def facelogin():
 		img2=np.array(ima2.convert("RGB"))
 		df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
 		res=str(df)
+		print(res)
 		if 'True' in res:
 			token=uuid.uuid4()
 			token=str(token)+"$"+request.remote_addr+"$"+uname
@@ -198,6 +200,7 @@ def facelogin():
 		else:
 			return render_template("error.html", reason="Facial recognition failed.")
 	except:
+		traceback.print_exc()
 		return render_template("error.html", reason="Facial recognition failed.")
 
 
