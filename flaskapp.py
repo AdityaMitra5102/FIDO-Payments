@@ -180,22 +180,25 @@ def facelogin():
 	from io import BytesIO
 	import numpy as np
 	from deepface import DeepFace
-	getUserCount()
-	uname=request.form["param"]
-	imga1=getImg(uname)
-	imga2=request.form["img"]
-	ima1=Image.open(BytesIO(base64.b64decode(imga1)))
-	ima2=Image.open(BytesIO(base64.b64decode(imga2)))
-	img1=np.array(ima1.convert("RGB"))
-	img2=np.array(ima2.convert("RGB"))
-	df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
-	res=str(df)
-	if 'True' in res:
-		token=uuid.uuid4()
-		token=str(token)+"$"+request.remote_addr+"$"+uname
-		tok=encr(token)
-		return render_template("authenticate.html", tok=tok, uname=uname)
-	else:
+	try:
+		getUserCount()
+		uname=request.form["param"]
+		imga1=getImg(uname)
+		imga2=request.form["img"]
+		ima1=Image.open(BytesIO(base64.b64decode(imga1)))
+		ima2=Image.open(BytesIO(base64.b64decode(imga2)))
+		img1=np.array(ima1.convert("RGB"))
+		img2=np.array(ima2.convert("RGB"))
+		df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
+		res=str(df)
+		if 'True' in res:
+			token=uuid.uuid4()
+			token=str(token)+"$"+request.remote_addr+"$"+uname
+			tok=encr(token)
+			return render_template("authenticate.html", tok=tok, uname=uname)
+		else:
+			return render_template("error.html", reason="Facial recognition failed.")
+	except:
 		return render_template("error.html", reason="Facial recognition failed.")
 
 
