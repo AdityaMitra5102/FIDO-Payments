@@ -24,7 +24,7 @@ def sendEmail(id,otp):
 	s.sendmail(senderacc, id, message)
 	s.quit()
 	
-def sendEmailLink(id,lnk,ua,loc):
+def sendEmailLink(id,lnk,ua,loc=""):
 	s = smtplib.SMTP(server,port)
 	s.starttls()
 	s.login(senderacc, senderpass)
