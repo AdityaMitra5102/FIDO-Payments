@@ -410,7 +410,7 @@ def register_begin_platform():
     ip=request.remote_addr
     ip1=encuname[1]
     if not ip==ip1:
-	abort(401)
+        abort(401)
     credentials=read_key(uname)
     registration_data, state = server.register_begin(
         {
