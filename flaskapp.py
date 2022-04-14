@@ -186,7 +186,7 @@ def facelogin():
 		imga1=getImg(uname)
 		imga2=request.form["img"]
 		ima1=Image.open(BytesIO(base64.b64decode(imga1)))
-		ima2=Image.open(BytesIO(base64.b64decode(imga2)))
+		ima2=imga2 #Image.open(BytesIO(base64.b64decode(imga2)))
 		img1=np.array(ima1.convert("RGB"))
 		img2=np.array(ima2.convert("RGB"))
 		df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
@@ -676,10 +676,11 @@ def read_key(uname):
 		return []
 
 def addImg(uname,img):
-	uploadImgFile(img,uname)
+	ima=Image.open(BytesIO(base64.b64decode(img)))
+	uploadImgFile(pickle.dumps(ima),uname)
 
 def getImg(uname):
-	return downloadImgFile(uname)
+	return pickle.loads(downloadImgFile(uname))
 
 if __name__ == "__main__":
 	app.run(ssl_context="adhoc", host='0.0.0.0', port=8080, debug=False)
