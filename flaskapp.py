@@ -12,7 +12,6 @@ from os import path
 from sqloperations import *
 from emailoperations import *
 from storageoperations import *
-from readAudit import *
 from user_agents import parse
 import requests
 import hashlib
