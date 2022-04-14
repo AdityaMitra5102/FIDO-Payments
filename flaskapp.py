@@ -15,6 +15,7 @@ from storageoperations import *
 from user_agents import parse
 from PIL import Image
 from io import BytesIO
+import numpy as np
 import base64
 import requests
 import hashlib
