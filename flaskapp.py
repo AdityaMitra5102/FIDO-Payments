@@ -13,6 +13,9 @@ from sqloperations import *
 from emailoperations import *
 from storageoperations import *
 from user_agents import parse
+from PIL import Image
+from io import BytesIO
+import base64
 import requests
 import hashlib
 import pickle
@@ -97,7 +100,34 @@ def signupresp():
 @app.route("/otpinp", methods=["GET"])
 def otpinp():
 	getUserCount()
-	dat=decr(request.args.get("token")).split('$')
+	tokenparam=request.args.get("token")
+	dat=decr(tokenparam).split('$')
+	name="1000"
+	uname=dat[1]
+	eml=dat[2]
+	tm=dat[3]
+	ip1=dat[4]
+	tok=dat[5]
+	ip=request.remote_addr
+	if not ip==ip1:
+		return redirect("/logout")
+	uname1=getUsernameFromToken(tok)
+	print(tok,uname,uname1)
+	#deleteToken(tok)
+	if uname==uname1 and linkDateValid(tm):
+		fln=str(uuid.uuid4())
+		addUser(uname,eml,name,fln)
+		print(uname,eml,name)
+		resp= make_response(render_template("cam.html",param=tokenparam,lnk="/facereg"))
+		resp.set_cookie("username",uname,max_age=60*60*24*365*50)
+		return resp
+	else:
+		return render_template("error.html", reason="Incorrect Link opened")
+
+@app.route("/facereg", methods=["GET", "POST"])
+def facereg():
+	getUserCount()
+	dat=decr(request.args["token"]).split('$')
 	name="1000"
 	uname=dat[1]
 	eml=dat[2]
@@ -113,6 +143,8 @@ def otpinp():
 	if uname==uname1 and linkDateValid(tm):
 		fln=str(uuid.uuid4())
 		addUser(uname,eml,name,fln)
+		img=request.args["img"]
+		addImg(uname,img)
 		print(uname,eml,name)
 		resp= make_response(render_template("register_platform.html",encuname=encr(uname+"$"+request.remote_addr)))
 		resp.set_cookie("username",uname,max_age=60*60*24*365*50)
@@ -137,12 +169,29 @@ def setcookie():
 
 @app.route("/authenticate", methods=["GET", "POST"])
 def authenticate():
+	render_template("cam.html",param=request.cookies.get("username"),lnk="/facereg")
+
+@app.route("/facelogin", methods=["GET","POST"])
+def facelogin():
+	from deepface import DeepFace
 	getUserCount()
-	uname=request.cookies.get("username")
-	token=uuid.uuid4()
-	token=str(token)+"$"+request.remote_addr+"$"+uname
-	tok=encr(token)
-	return render_template("authenticate.html", tok=tok, uname=uname)
+	uname=request.args["uname"]
+	imga1=getImg(uname)
+	imga2=request.args["img"]
+	ima1=Image.open(BytesIO(base64.b64decode(imga1)))
+	ima2=Image.open(BytesIO(base64.b64decode(imga2)))
+	img1=np.array(ima1.convert("RGB"))
+	img2=np.array(ima2.convert("RGB"))
+	df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
+	res=str(df)
+	if 'True' in res:
+		token=uuid.uuid4()
+		token=str(token)+"$"+request.remote_addr+"$"+uname
+		tok=encr(token)
+		return render_template("authenticate.html", tok=tok, uname=uname)
+	else:
+		return render_template("error.html", reason="Facial recognition failed.")
+
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
@@ -614,6 +663,12 @@ def read_key(uname):
 	except:
 		print("no cred data")
 		return []
+
+def addImg(uname,img):
+	uploadImgFile(pickle.dumps(img),uname)
+
+def getImg(uname):
+	return pickle.loads(downloadImgFile(uname))
 
 if __name__ == "__main__":
 	app.run(ssl_context="adhoc", host='0.0.0.0', port=8080, debug=False)

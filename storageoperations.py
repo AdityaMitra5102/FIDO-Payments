@@ -5,6 +5,7 @@ connect_str='DefaultEndpointsProtocol=https;AccountName=paymentkeys;AccountKey=p
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
 cryptocontainer=blob_service_client.get_container_client('cryptofiles')
+imagecontainer=blob_service_client.get_container_client('imgfiles')
 
 def uploadCryptoFile(data,fln):
   blob_client = blob_service_client.get_blob_client(container='cryptofiles', blob=fln)
@@ -14,16 +15,31 @@ def downloadCryptoFile(fln):
   blob_client = blob_service_client.get_blob_client(container='cryptofiles', blob=fln)
   return blob_client.download_blob().readall()
 
+def uploadImgFile(data,fln):
+  blob_client = blob_service_client.get_blob_client(container='imgfiles', blob=fln)
+  blob_client.upload_blob(data, overwrite=True)
+  
+def downloadImgFile(fln):
+  blob_client = blob_service_client.get_blob_client(container='imgfiles', blob=fln)
+  return blob_client.download_blob().readall()
+
 def createContainers():
   try:
     container_properties = cryptocontainer.get_container_properties()
   except Exception as e:
     cryptocontainer.create_container()
- 
+  try:
+    container_properties = imagecontainer.get_container_properties()
+  except Exception as e:
+    imagecontainer.create_container() 
     
 def resetContainers():
   try:
     cryptocontainer.delete_container()
+  except Exception as e:
+    pass
+ try:
+    imagecontainer.delete_container()
   except Exception as e:
     pass
  
