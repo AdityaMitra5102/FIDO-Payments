@@ -84,6 +84,22 @@
         width: 760px;
       }
 
+      @media only screen and (max-width: 600px) {
+        #content {
+          margin-left: 30% !important;
+
+        }
+
+        .camera {
+          display: block;
+        }
+
+        .output {
+          display: block;
+
+        }
+      }
+
     </style>
     <script>
       (function () {
@@ -244,7 +260,7 @@
       <section class="inner-page">
         <div class="container d-flex justify-content-center">
           <article>
-            <div class="contentarea">
+            <div class="contentarea" id="content">
               <h1>
                 Facial recognition
               </h1>
