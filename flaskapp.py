@@ -127,7 +127,7 @@ def otpinp():
 @app.route("/facereg", methods=["GET", "POST"])
 def facereg():
 	getUserCount()
-	dat=decr(request.args["token"]).split('$')
+	dat=decr(request.form["param"]).split('$')
 	name="1000"
 	uname=dat[1]
 	eml=dat[2]
@@ -143,7 +143,7 @@ def facereg():
 	if uname==uname1 and linkDateValid(tm):
 		fln=str(uuid.uuid4())
 		addUser(uname,eml,name,fln)
-		img=request.args["img"]
+		img=request.form["img"]
 		addImg(uname,img)
 		print(uname,eml,name)
 		resp= make_response(render_template("register_platform.html",encuname=encr(uname+"$"+request.remote_addr)))
@@ -175,9 +175,9 @@ def authenticate():
 def facelogin():
 	from deepface import DeepFace
 	getUserCount()
-	uname=request.args["uname"]
+	uname=request.form["param"]
 	imga1=getImg(uname)
-	imga2=request.args["img"]
+	imga2=request.form["img"]
 	ima1=Image.open(BytesIO(base64.b64decode(imga1)))
 	ima2=Image.open(BytesIO(base64.b64decode(imga2)))
 	img1=np.array(ima1.convert("RGB"))
