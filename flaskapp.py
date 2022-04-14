@@ -169,7 +169,7 @@ def setcookie():
 
 @app.route("/authenticate", methods=["GET", "POST"])
 def authenticate():
-	return render_template("cam.html",param=request.cookies.get("username"),lnk="/facereg")
+	return render_template("cam.html",param=request.cookies.get("username"),lnk="/facelogin")
 
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
