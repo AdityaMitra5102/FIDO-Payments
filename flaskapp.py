@@ -665,10 +665,10 @@ def read_key(uname):
 		return []
 
 def addImg(uname,img):
-	uploadImgFile(pickle.dumps(img),uname)
+	uploadImgFile(img,uname)
 
 def getImg(uname):
-	return pickle.loads(downloadImgFile(uname))
+	return downloadImgFile(uname)
 
 if __name__ == "__main__":
 	app.run(ssl_context="adhoc", host='0.0.0.0', port=8080, debug=False)
