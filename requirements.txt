@@ -6,6 +6,7 @@ pickle-mixin
 uuid
 secure-smtplib
 deepface
+azure-core
 azure-storage-blob
 pandas
 pyyaml
