@@ -595,7 +595,7 @@ def isValidEmail(email):
 	
 def getSHAStr(data):
 	sha256_hash = hashlib.sha256()
-        sha256_hash.update(data)
+	sha256_hash.update(data)
 	return sha256_hash.hexdigest()
 	
 def encr(wrd):
