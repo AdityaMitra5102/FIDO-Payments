@@ -2,7 +2,7 @@
 
 clear
 cd ~
-rm -rf FIDO-Payments
+sudo rm -rf FIDO-Payments
 git clone https://github.com/AdityaMitra5102/FIDO-Payments
 mkdir medrecords
 cd medrecords
