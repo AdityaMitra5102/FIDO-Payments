@@ -176,7 +176,12 @@ def setcookie():
 
 @app.route("/authenticate", methods=["GET", "POST"])
 def authenticate():
-	return render_template("cam.html",param=request.cookies.get("username"),lnk="/facelogin")
+	getUserCount()
+	uname=request.cookies.get("username")
+	em=getEmailFromUsername(uname)
+	if em=="00":
+		return render_template("error.html",reason="User does not exist")
+	return render_template("cam.html",param=uname,lnk="/facelogin")
 
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
