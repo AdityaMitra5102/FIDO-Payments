@@ -16,7 +16,7 @@ from user_agents import parse
 from PIL import Image
 from io import BytesIO
 from deepface import DeepFace
-import numpy as np
+import numpy
 import traceback
 import base64
 import requests
@@ -192,8 +192,8 @@ def facelogin():
 		imga2=request.form["img"]
 		ima1=imga1 #Image.open(BytesIO(base64.b64decode(imga1)))
 		ima2=Image.open(BytesIO(base64.b64decode(imga2)))
-		img1=np.array(ima1.convert("RGB"))
-		img2=np.array(ima2.convert("RGB"))
+		img1=numpy.array(ima1.convert("RGB"))
+		img2=numpy.array(ima2.convert("RGB"))
 		df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
 		res=str(df)
 		print(res)
