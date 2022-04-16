@@ -12,16 +12,22 @@ def uploadCryptoFile(data,fln):
   blob_client.upload_blob(data, overwrite=True)
   
 def downloadCryptoFile(fln):
-  blob_client = blob_service_client.get_blob_client(container='cryptofiles', blob=fln)
-  return blob_client.download_blob().readall()
+  try:
+    blob_client = blob_service_client.get_blob_client(container='cryptofiles', blob=fln)
+    return blob_client.download_blob().readall()
+  except:
+    os.system('sudo service apache2 restart')
 
 def uploadImgFile(data,fln):
   blob_client = blob_service_client.get_blob_client(container='imgfiles', blob=fln)
   blob_client.upload_blob(data, overwrite=True)
   
 def downloadImgFile(fln):
-  blob_client = blob_service_client.get_blob_client(container='imgfiles', blob=fln)
-  return blob_client.download_blob().readall()
+  try:
+    blob_client = blob_service_client.get_blob_client(container='imgfiles', blob=fln)
+    return blob_client.download_blob().readall()
+  except:
+    os.system('sudo service apache2 restart')
 
 def createContainers():
   try:
