@@ -1,5 +1,6 @@
 from azure.storage.blob import *
 from datetime import *
+import os
 
 connect_str='DefaultEndpointsProtocol=https;AccountName=paymentkeys;AccountKey=pxicg6JeqWm2FXDF1VXBfeiHM1LWrWDIN9IqvNDeaUw83v58Og8mr2Of5hUlbXoip6VNkqsWO0e366yhyaFHNw==;EndpointSuffix=core.windows.net'
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
