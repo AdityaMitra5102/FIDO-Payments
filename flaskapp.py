@@ -30,7 +30,7 @@ import re
 import pytz
 
 url="payments.centralindia.cloudapp.azure.com"
-filepth='/home/vm_user/medrecords/'
+filepth='/home/vm_user/tempkeys/'
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
 metrics = ["cosine", "euclidean", "euclidean_l2"]

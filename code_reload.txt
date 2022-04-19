@@ -4,11 +4,11 @@ clear
 cd ~
 sudo rm -rf FIDO-Payments
 git clone https://github.com/AdityaMitra5102/FIDO-Payments
-mkdir medrecords
-cd medrecords
+mkdir tempkeys
+cd tempkeys
 mkdir appfiles
 cd ~
-chmod -R 777 medrecords
+chmod -R 777 tempkeys
 sudo rm /var/log/apache2/error.log
 sudo rm /var/log/apache2/access.log
 sudo service apache2 restart
