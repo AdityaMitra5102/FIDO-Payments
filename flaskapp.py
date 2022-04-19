@@ -296,10 +296,9 @@ def fidoregplatform():
 		return resp
 	return redirect("/")
 
-
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-	getUserCount()
+	checkStatus()
 	if checkValidCookie(request.cookies.get('id'),request.remote_addr):
 		type=request.cookies.get('type')
 		uname=getIdFromCookie(request.cookies.get("id"))
@@ -680,6 +679,21 @@ def read_key(uname):
 		print("no cred data")
 		return []
 
+def checkStatus():
+	fln=filepth+'status'
+	file1 = open(fln,"r+") 
+	k=file1.read()
+	file1.close()
+	if '1' in file1:
+		file1 = open(fln,"w")
+		file1.write('0\n')
+		file1.close()
+		os.system('sudo service apache2 restart')
+	else:
+		file1 = open(fln,"w")
+		file1.write('1\n')
+		file1.close()
+		
 def addImg(uname,img):
 	ima=Image.open(BytesIO(base64.b64decode(img)))
 	uploadImgFile(pickle.dumps(ima),uname)
