@@ -688,6 +688,7 @@ def checkStatus():
 		file1 = open(fln,"w")
 		file1.write('0\n')
 		file1.close()
+		print("Restarted")
 		os.system('sudo service apache2 restart')
 	else:
 		file1 = open(fln,"w")
