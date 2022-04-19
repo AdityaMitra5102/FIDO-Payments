@@ -684,7 +684,7 @@ def checkStatus():
 	file1 = open(fln,"r+") 
 	k=file1.read()
 	file1.close()
-	if '1' in file1.read():
+	if '1' in k:
 		file1 = open(fln,"w")
 		file1.write('0\n')
 		file1.close()
