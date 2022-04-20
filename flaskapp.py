@@ -426,7 +426,7 @@ def clearcookies():
 def loginotp():
 	getUserCount()
 	uname1=request.args.get('uname')
-	uname=decr(uname)
+	uname=decr(uname1)
 	eml=getEmailFromUsername(uname)
 	if eml=="00":
 		resp=make_response(render_template("error.html", reason="No such user"))
