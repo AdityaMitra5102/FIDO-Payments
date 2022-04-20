@@ -14,7 +14,6 @@ from emailoperations import *
 from storageoperations import *
 from user_agents import parse
 from io import BytesIO
-import numpy
 import traceback
 import base64
 import requests
@@ -184,6 +183,7 @@ def authenticate():
 
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
+	import numpy
 	from PIL import Image
 	from deepface import DeepFace
 	try:
