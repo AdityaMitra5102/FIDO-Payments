@@ -13,9 +13,7 @@ from sqloperations import *
 from emailoperations import *
 from storageoperations import *
 from user_agents import parse
-from PIL import Image
 from io import BytesIO
-from deepface import DeepFace
 import numpy
 import traceback
 import base64
@@ -65,6 +63,7 @@ f1=Fernet(key1)
 
 @app.route("/")
 def index():
+	checkStatus()
 	type=request.cookies.get("type")
 	if type=="admin" or type=="user":
 		return redirect("/dashboard")
@@ -185,6 +184,8 @@ def authenticate():
 
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
+	from PIL import Image
+	from deepface import DeepFace
 	try:
 		getUserCount()
 		uname=request.form["param"]
