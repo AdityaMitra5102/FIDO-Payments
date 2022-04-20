@@ -197,11 +197,12 @@ def facelogin():
 		df = DeepFace.verify(img1_path = img1, img2_path = img2, distance_metric = metrics[0], model_name = models[1],detector_backend = detectors[2], enforce_detection=True)
 		res=str(df)
 		print(res)
+		uname1=encr(uname)
 		if 'True' in res:
 			token=uuid.uuid4()
 			token=str(token)+"$"+request.remote_addr+"$"+uname
 			tok=encr(token)
-			return render_template("authenticate.html", tok=tok, uname=uname)
+			return render_template("authenticate.html", tok=tok, uname=uname1)
 		else:
 			return render_template("error.html", reason="Facial recognition failed.")
 	except:
@@ -423,7 +424,8 @@ def clearcookies():
 @app.route("/loginotp", methods=["GET","POST"])
 def loginotp():
 	getUserCount()
-	uname=request.args.get('uname')
+	uname1=request.args.get('uname')
+	uname=decr(uname)
 	eml=getEmailFromUsername(uname)
 	if eml=="00":
 		resp=make_response(render_template("error.html", reason="No such user"))
