@@ -34,11 +34,17 @@ def createContainers():
   try:
     container_properties = cryptocontainer.get_container_properties()
   except Exception as e:
-    cryptocontainer.create_container()
+    try:
+      cryptocontainer.create_container()
+    except:
+      os.system('sudo service apache2 restart')
   try:
     container_properties = imagecontainer.get_container_properties()
   except Exception as e:
-    imagecontainer.create_container() 
+    try:
+      imagecontainer.create_container() 
+    except:
+      os.system('sudo service apache2 restart')
     
 def resetContainers():
   try:
