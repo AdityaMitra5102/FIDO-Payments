@@ -299,7 +299,8 @@ def fidoregplatform():
 
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-	checkStatus()
+	#checkStatus()
+	getUserCount()
 	if checkValidCookie(request.cookies.get('id'),request.remote_addr):
 		type=request.cookies.get('type')
 		uname=getIdFromCookie(request.cookies.get("id"))
