@@ -39,16 +39,16 @@ createContainers()
 
 app = Flask(__name__, static_url_path="")
 
-if not path.exists(filepth+'appfiles/'+'medrecseckey.pkl'):
-	outp3=open(filepth+'appfiles/'+'medrecseckey.pkl','wb')
+if not path.exists(filepth+'appfiles/'+'pymtseckey.pkl'):
+	outp3=open(filepth+'appfiles/'+'pymtseckey.pkl','wb')
 	pickle.dump(os.urandom(32),outp3,pickle.HIGHEST_PROTOCOL)
 	outp3.close()
 
-inp3=open(filepth+'appfiles/'+'medrecseckey.pkl', 'rb')
+inp3=open(filepth+'appfiles/'+'pymtseckey.pkl', 'rb')
 app.secret_key = pickle.load(inp3)
 inp3.close()
 
-rp = PublicKeyCredentialRpEntity(url, "Medical Records")
+rp = PublicKeyCredentialRpEntity(url, "FIDO Payments")
 server = Fido2Server(rp)
 
 if not path.exists(filepth+'appfiles/'+'fernetkey1.pkl'):
@@ -260,8 +260,6 @@ def inittag():
 			return render_template("error.html", reason="Amount must be positive")
 		tagid=uuid.uuid4()
 		addTag(uname,tagid,iname,exp)
-		#eml=getEmailFromUsername(uname)
-		#sendEmailTokenAdd(eml,iname,exp)
 		return render_template("webnfc.html", scanbuttonparam="hidden", writebuttonparam="", url=url,token=tagid)
 	return redirect("/")
 
