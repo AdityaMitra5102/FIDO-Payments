@@ -181,6 +181,11 @@ def authenticate():
 		return render_template("error.html",reason="User does not exist")
 	return render_template("cam.html",param=uname,lnk="/facelogin")
 
+@app.route("/faceerror", methods=["GET","POST"])
+def faceerror():
+	checkStatus()
+	return render_template("error.html", reason="Facial recognition failed.")
+
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
 	import numpy
@@ -208,7 +213,7 @@ def facelogin():
 			return render_template("error.html", reason="Facial recognition failed.")
 	except:
 		traceback.print_exc()
-		return render_template("error.html", reason="Facial recognition failed.")
+		return redirect("/faceerror")
 
 
 @app.route("/signin", methods=["GET", "POST"])
