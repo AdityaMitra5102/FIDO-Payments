@@ -152,7 +152,7 @@ def facereg():
 		img=request.form["img"]
 		addImg(uname,img)
 		print(uname,eml,name)
-		resp= make_response(render_template("register_platform.html",encuname=encr(uname+"$"+request.remote_addr)))
+		resp= make_response(render_template("register.html",encuname=encr(uname+"$"+request.remote_addr)))
 		resp.set_cookie("username",uname,max_age=60*60*24*365*50)
 		return resp
 	else:
