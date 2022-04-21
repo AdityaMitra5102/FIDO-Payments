@@ -322,8 +322,8 @@ def dashboard():
 			sender=getUsernameFromTag(tok)
 			if sender=="00":
 				resp=render_template('error.html', reason="Some error has occurred")
-				resp.set_cookies('rec','false')
-				resp.set_cookies('token','null')
+				resp.set_cookie('rec','false')
+				resp.set_cookie('token','null')
 				return resp
 			receiver=uname
 			print(sender,receiver)
