@@ -13,6 +13,7 @@ from sqloperations import *
 from emailoperations import *
 from storageoperations import *
 from user_agents import parse
+from PIL import Image
 from io import BytesIO
 import traceback
 import base64
@@ -189,7 +190,6 @@ def faceerror():
 @app.route("/facelogin", methods=["GET","POST"])
 def facelogin():
 	import numpy
-	from PIL import Image
 	from deepface import DeepFace
 	try:
 		getUserCount()
